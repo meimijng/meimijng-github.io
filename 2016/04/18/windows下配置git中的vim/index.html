@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>windows下配置git中的vim | meiming的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Gvim&amp;#x4E0B;&amp;#x4FEE;&amp;#x6539;&amp;#x914D;&amp;#x7F6E;&amp;#x5B89;&amp;#x88C5;&amp;#x597D;Gvim&amp;#x540E;&amp;#xFF0C;&amp;#x53EF;&amp;#x4EE5;&amp;#x627E;&amp;#x5230;&amp;#x5B89;&amp;#x88C5;&amp;#x76EE;&amp;#x5F55;&amp;#x4E0B;&amp;#x7684; _vimrc &amp;#x6587;&amp;#x4EF6;&amp;#xFF08;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="windows下配置git中的vim">
+<meta property="og:url" content="http://wustmeiming.github.io/2016/04/18/windows下配置git中的vim/index.html">
+<meta property="og:site_name" content="meiming的博客">
+<meta property="og:description" content="Gvim&amp;#x4E0B;&amp;#x4FEE;&amp;#x6539;&amp;#x914D;&amp;#x7F6E;&amp;#x5B89;&amp;#x88C5;&amp;#x597D;Gvim&amp;#x540E;&amp;#xFF0C;&amp;#x53EF;&amp;#x4EE5;&amp;#x627E;&amp;#x5230;&amp;#x5B89;&amp;#x88C5;&amp;#x76EE;&amp;#x5F55;&amp;#x4E0B;&amp;#x7684; _vimrc &amp;#x6587;&amp;#x4EF6;&amp;#xFF08;">
+<meta property="og:updated_time" content="2016-12-27T02:38:16.234Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="windows下配置git中的vim">
+<meta name="twitter:description" content="Gvim&amp;#x4E0B;&amp;#x4FEE;&amp;#x6539;&amp;#x914D;&amp;#x7F6E;&amp;#x5B89;&amp;#x88C5;&amp;#x597D;Gvim&amp;#x540E;&amp;#xFF0C;&amp;#x53EF;&amp;#x4EE5;&amp;#x627E;&amp;#x5230;&amp;#x5B89;&amp;#x88C5;&amp;#x76EE;&amp;#x5F55;&amp;#x4E0B;&amp;#x7684; _vimrc &amp;#x6587;&amp;#x4EF6;&amp;#xFF08;">
+  
+    <link rel="alternate" href="/atom.xml" title="meiming的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">meiming的博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">留存的记忆</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">主页</a>
+        
+          <a class="main-nav-link" href="/archives">文章</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://wustmeiming.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-windows下配置git中的vim" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/18/windows下配置git中的vim/" class="article-date">
+  <time datetime="2016-04-18T08:49:09.000Z" itemprop="datePublished">2016-04-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      windows下配置git中的vim
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Gvim&#x4E0B;&#x4FEE;&#x6539;&#x914D;&#x7F6E;"><a href="#Gvim&#x4E0B;&#x4FEE;&#x6539;&#x914D;&#x7F6E;" class="headerlink" title="Gvim&#x4E0B;&#x4FEE;&#x6539;&#x914D;&#x7F6E;"></a>Gvim&#x4E0B;&#x4FEE;&#x6539;&#x914D;&#x7F6E;</h2><p>&#x5B89;&#x88C5;&#x597D;Gvim&#x540E;&#xFF0C;&#x53EF;&#x4EE5;&#x627E;&#x5230;&#x5B89;&#x88C5;&#x76EE;&#x5F55;&#x4E0B;&#x7684; _vimrc &#x6587;&#x4EF6;&#xFF08;&#x4F8B;&#x5982;&#xFF1A;&#x6211;&#x7684;&#x5728; C:\Program Files (x86)\Vim\&#xFF09;<br>&#x6DFB;&#x52A0;&#x4E00;&#x4E9B;&#x81EA;&#x5DF1;&#x5E38;&#x7528;&#x7684;&#x914D;&#x7F6E;&#xFF0C;&#x5373;&#x53EF;&#x5728;Gvim&#x4E2D;&#x751F;&#x6548;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&quot;&#x663E;&#x793A;&#x884C;&#x53F7;</div><div class="line">set nu</div><div class="line"></div><div class="line">&quot; &#x8BBE;&#x7F6E;leader&#x952E;</div><div class="line">let mapleader = &quot;;&quot;</div><div class="line">let g:mapleader = &quot;;&quot;</div><div class="line"></div><div class="line">&quot; &#x5FEB;&#x901F;&#x4FDD;&#x5B58;</div><div class="line">nmap &lt;leader&gt;w :w!&lt;cr&gt;</div><div class="line"></div><div class="line">&quot; &#x5F3A;&#x5236;&#x9000;&#x51FA;</div><div class="line">nmap &lt;leader&gt;q :q!&lt;cr&gt;</div><div class="line"></div><div class="line">&quot; &#x4ECE;&#x63D2;&#x5165;&#x6A21;&#x5F0F;&#x8FDB;&#x5165;&#x6B63;&#x5E38;&#x6A21;&#x5F0F;</div><div class="line">:imap jk &lt;Esc&gt;</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<h2 id="Git&#x4E2D;&#x7684;vim&#x7F16;&#x8F91;&#x5668;&#x7684;&#x914D;&#x7F6E;&#x4FEE;&#x6539;"><a href="#Git&#x4E2D;&#x7684;vim&#x7F16;&#x8F91;&#x5668;&#x7684;&#x914D;&#x7F6E;&#x4FEE;&#x6539;" class="headerlink" title="Git&#x4E2D;&#x7684;vim&#x7F16;&#x8F91;&#x5668;&#x7684;&#x914D;&#x7F6E;&#x4FEE;&#x6539;"></a>Git&#x4E2D;&#x7684;vim&#x7F16;&#x8F91;&#x5668;&#x7684;&#x914D;&#x7F6E;&#x4FEE;&#x6539;</h2><p>&#x4E00;&#x76F4;&#x4F7F;&#x7528;git&#x5B98;&#x7F51;&#x7684;Git for Windows&#xFF0C;&#x4E60;&#x60EF;&#x7528;bash&#xFF0C;&#x4F7F;&#x7528;&#x81EA;&#x5E26;&#x7684;Vim&#x7F16;&#x8F91;&#x5668;&#x603B;&#x662F;&#x60F3;&#x6539;&#x914D;&#x7F6E;&#xFF0C;&#x4F46;&#x662F;&#x4E00;&#x76F4;&#x4E0D;&#x77E5;&#x9053;&#x5982;&#x4F55;&#x4FEE;&#x6539;&#xFF0C;&#x4ECA;&#x5929;&#x7814;&#x7A76;&#x4E86;&#x4E00;&#x4E0B;&#x5982;&#x4F55;&#x53BB;&#x4FEE;&#x6539;&#x914D;&#x7F6E;&#xFF0C;&#x9996;&#x5148;&#x5230;Git&#x7684;&#x5B89;&#x88C5;&#x76EE;&#x5F55;&#xFF08;&#x6211;&#x7684;&#x662F; C:\Program Files\Git\ &#xFF09;,&#x5728;&#x76EE;&#x5F55; C:\Program Files\Git\usr\share\vim\vim74\ &#x627E;&#x5230;&#x4E86;vim&#x7684;&#x5B89;&#x88C5;&#x6587;&#x4EF6;&#xFF0C;&#x7136;&#x800C;&#x5E76;&#x6CA1;&#x6709;&#x53D1;&#x73B0;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#xFF0C;&#x6CA1;&#x529E;&#x6CD5;&#x53EA;&#x80FD;&#x5728; git &#x7684;&#x5B89;&#x88C5;&#x76EE;&#x5F55;&#x4E0B;&#x641C;&#x7D22; vimrc &#x4E4B;&#x540E;&#x5B9A;&#x4F4D;&#x5230;&#x4E86; C:\Program Files\Git\etc\ &#x76EE;&#x5F55;&#xFF0C;&#x6D4B;&#x8BD5;&#x4E86;&#x4E00;&#x4E0B;&#xFF0C;&#x6DFB;&#x52A0;&#x4E86;&#x663E;&#x793A;&#x884C;&#x53F7;&#x7684;&#x914D;&#x7F6E;&#xFF0C;&#x5728;git bash&#x4E2D;&#x6D4B;&#x8BD5;&#x4F7F;&#x7528;vim&#x7F16;&#x8F91;&#x5668;&#xFF0C;&#x786E;&#x5B9E;&#x663E;&#x793A;&#x51FA;&#x4E86;&#x884C;&#x53F7;&#x3002;<br><strong style="color:red"><strong>&#x603B;&#x7ED3;&#xFF1A;&#x53EA;&#x7528;&#x4FEE;&#x6539;git&#x5B89;&#x88C5;&#x76EE;&#x5F55;&#x4E0B;&#x7684; etc &#x76EE;&#x5F55;&#x4E2D;&#x7684; vimrc &#x5373;&#x53EF;&#x8FBE;&#x5230;&#x4FEE;&#x6539; git &#x4E2D; vim &#x7F16;&#x8F91;&#x5668;&#x914D;&#x7F6E;&#x7684;&#x6548;&#x679C;.</strong><strong></strong></strong></p>
+
+      
+	  <div>
+	  <br/>
+	  &nbsp;&nbsp;转载请注明出处：<a href="http://wustmeiming.github.io/2016/04/18/windows下配置git中的vim/">http://wustmeiming.github.io/2016/04/18/windows下配置git中的vim/</a>
+	  </div>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://wustmeiming.github.io/2016/04/18/windows下配置git中的vim/" data-id="cix7at2sf0008b9t0b8oaryl6" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/">vim</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/04/18/hexo中的那些坑/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          hexo中的那些坑
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/04/15/hexo博客使用本地图片/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">hexo博客使用本地图片</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+    <!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="post-windows下配置git中的vim" data-title="windows下配置git中的vim" data-url="http://wustmeiming.github.io/2016/04/18/windows下配置git中的vim/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"wustmeiming"};
+		(function() {
+			var ds = document.createElement('script');
+			ds.type = 'text/javascript';ds.async = true;
+			ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+			ds.charset = 'UTF-8';
+			(document.getElementsByTagName('head')[0] 
+			 || document.getElementsByTagName('body')[0]).appendChild(ds);
+		})();
+		</script>
+	<!-- 多说公共JS代码 end -->
+</section>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/axure/">axure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/server/">server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图像处理/">图像处理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图像旋转/">图像旋转</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多说插件/">多说插件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件操作/">文件操作</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/本地图片/">本地图片</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/端口/">端口</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/评论/">评论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/静态博客/">静态博客</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/axure/" style="font-size: 10px;">axure</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/server/" style="font-size: 10px;">server</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/图像处理/" style="font-size: 10px;">图像处理</a> <a href="/tags/图像旋转/" style="font-size: 10px;">图像旋转</a> <a href="/tags/多说插件/" style="font-size: 10px;">多说插件</a> <a href="/tags/文件操作/" style="font-size: 10px;">文件操作</a> <a href="/tags/本地图片/" style="font-size: 10px;">本地图片</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/端口/" style="font-size: 10px;">端口</a> <a href="/tags/评论/" style="font-size: 10px;">评论</a> <a href="/tags/静态博客/" style="font-size: 10px;">静态博客</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">6</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/12/27/Matlab解析mnist数据库文件/">Matlab解析mnist数据库文件</a>
+          </li>
+        
+          <li>
+            <a href="/2016/05/03/python文件操作归纳/">python文件操作归纳</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/18/hexo中的那些坑/">hexo中的那些坑</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/18/windows下配置git中的vim/">windows下配置git中的vim</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/15/hexo博客使用本地图片/">hexo博客使用本地图片</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 meiming<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">文章</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
