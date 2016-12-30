@@ -68,6 +68,62 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-python图像处理入门-1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/30/python图像处理入门-1/" class="article-date">
+  <time datetime="2016-12-30T04:10:57.000Z" itemprop="datePublished">2016-12-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/30/python图像处理入门-1/">python图像处理入门[1]</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="python&#x56FE;&#x50CF;&#x5904;&#x7406;&#x73AF;&#x5883;&#x51C6;&#x5907;"><a href="#python&#x56FE;&#x50CF;&#x5904;&#x7406;&#x73AF;&#x5883;&#x51C6;&#x5907;" class="headerlink" title="python&#x56FE;&#x50CF;&#x5904;&#x7406;&#x73AF;&#x5883;&#x51C6;&#x5907;"></a>python&#x56FE;&#x50CF;&#x5904;&#x7406;&#x73AF;&#x5883;&#x51C6;&#x5907;</h1><p>&#x5B89;&#x88C5;&#x56FE;&#x50CF;&#x5904;&#x7406;&#x5E93;</p>
+<ol>
+<li><p>PIL<br>PythonWare&#x516C;&#x53F8;&#x63D0;&#x4F9B;&#x4E86;&#x514D;&#x8D39;&#x7684;&#x56FE;&#x50CF;&#x5904;&#x7406;&#x5DE5;&#x5177;&#x5305; PIL(Python Image Library),&#x8BE5;&#x8F6F;&#x4EF6;&#x5305;&#x63D0;&#x4F9B;&#x4E86;&#x57FA;&#x672C;&#x7684;&#x56FE;&#x50CF;&#x5904;&#x7406;&#x529F;&#x80FD;&#xFF0C;&#x5982;&#xFF1A;&#x6539;&#x53D8;&#x56FE;&#x50CF;&#x5927;&#x5C0F;&#xFF0C;&#x65CB;&#x8F6C;&#x56FE;&#x50CF;&#xFF0C;&#x56FE;&#x50CF;&#x683C;&#x5F0F;&#x8F6C;&#x6362;&#xFF0C;&#x8272;&#x573A;&#x7A7A;&#x95F4;&#x8F6C;&#x6362;&#xFF0C;&#x56FE;&#x50CF;&#x589E;&#x5F3A;&#xFF0C;&#x76F4;&#x65B9;&#x56FE;&#x5904;&#x7406;&#xFF0C;&#x63D2;&#x503C;&#x548C;&#x6EE4;&#x6CE2;&#x7B49;&#x7B49;&#x3002;</p>
+</li>
+<li><p>Pillow<br>Pillow &#x662F; PIL &#x7684;&#x66FF;&#x4EE3;&#x7248;&#x672C;&#xFF0C;PIL &#x8F6F;&#x4EF6;&#x5305;&#x63D0;&#x4F9B;&#x4E86;&#x57FA;&#x672C;&#x7684;&#x56FE;&#x50CF;&#x5904;&#x7406;&#x529F;&#x80FD;&#xFF0C;&#x5982;&#xFF1A;&#x6539;&#x53D8;&#x56FE;&#x50CF;&#x5927;&#x5C0F;&#xFF0C;&#x65CB;&#x8F6C;&#x56FE;&#x50CF;&#xFF0C;&#x56FE;&#x50CF;&#x683C;&#x5F0F;&#x8F6C;&#x6362;&#xFF0C;&#x8272;&#x573A;&#x7A7A;&#x95F4;&#x8F6C;&#x6362;&#xFF0C;&#x56FE;&#x50CF;&#x589E;&#x5F3A;&#xFF0C;&#x76F4;&#x65B9;&#x56FE;&#x5904;&#x7406;&#xFF0C;&#x63D2;&#x503C;&#x548C;&#x6EE4;&#x6CE2;&#x7B49;&#x7B49;&#x3002;<br>Pillow &#x4E3A;&#x4E86;&#x89E3;&#x51B3; PIL &#x7684;&#x4E24;&#x4E2A;&#x95EE;&#x9898;&#xFF1A;(1) &#x4E0D;&#x517C;&#x5BB9; setuptools (2) &#x62A5;&#x544A;&#x7684;&#x95EE;&#x9898;&#x592A;&#x591A;&#xFF0C;&#x800C;&#x66F4;&#x65B0;&#x592A;&#x6162; </p>
+</li>
+<li><p>OpenCV<br>OpenCV&#x6700;&#x521D;&#x662F;&#x7531;&#x82F1;&#x7279;&#x5C14;&#x516C;&#x53F8;&#x5F00;&#x53D1;&#x7684;&#x4E00;&#x5957;&#x5F00;&#x6E90;&#x7684;&#x8DE8;&#x5E73;&#x53F0;&#x8BA1;&#x7B97;&#x673A;&#x89C6;&#x89C9;&#x5E93;&#x3002;&#x5B83;&#x7528;C&#x8BED;&#x8A00;&#x5B9E;&#x73B0;&#x4E86;&#x8BB8;&#x591A;&#x56FE;&#x50CF;&#x5904;&#x7406;&#x548C;&#x8BA1;&#x7B97;&#x673A;&#x89C6;&#x89C9;&#x9886;&#x57DF;&#x7684;&#x7B97;&#x6CD5;&#xFF0C;&#x5E76;&#x63D0;&#x4F9B;&#x4E86;C++&#x7684;&#x8C03;&#x7528;&#x63A5;&#x53E3;&#x3002;</p>
+</li>
+</ol>
+<h2 id="&#x5B89;&#x88C5;PIL&#x6216;&#x7740;Pillow"><a href="#&#x5B89;&#x88C5;PIL&#x6216;&#x7740;Pillow" class="headerlink" title="&#x5B89;&#x88C5;PIL&#x6216;&#x7740;Pillow"></a>&#x5B89;&#x88C5;PIL&#x6216;&#x7740;Pillow</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install Pillow</div></pre></td></tr></table></figure>
+<p>&#x7B49;&#x5F85;&#x5B89;&#x88C5;&#x5B8C;&#x6210;&#xFF0C;&#x663E;&#x793A;&#x4FE1;&#x606F;&#x5982;&#x4E0B;&#xFF0C;&#x8868;&#x793A;&#x5B89;&#x88C5;&#x5B8C;&#x6210;<br>Collecting Pillow<br>  Downloading Pillow-3.4.2-cp27-cp27mu-manylinux1_x86_64.whl (5.6MB)<br>    100% |&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;| 5.6MB 51kB/s<br>Installing collected packages: Pillow<br>Successfully installed Pillow-3.4.2</p>
+<h2 id="&#x5B89;&#x88C5;OpenCV"><a href="#&#x5B89;&#x88C5;OpenCV" class="headerlink" title="&#x5B89;&#x88C5;OpenCV"></a>&#x5B89;&#x88C5;OpenCV</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt install python-opencv</div></pre></td></tr></table></figure>
+
+      
+	  <div>
+	  <br/>
+	  &nbsp;&nbsp;转载请注明出处：<a href="http://wustmeiming.github.io/2016/12/30/python图像处理入门-1/">http://wustmeiming.github.io/2016/12/30/python图像处理入门-1/</a>
+	  </div>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://wustmeiming.github.io/2016/12/30/python图像处理入门-1/" data-id="cixbghcnf0005r5t0oz8306zs" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/图像处理/">图像处理</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
     <article id="post-深度学习入门" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/12/27/深度学习入门/" class="article-date">
@@ -102,7 +158,7 @@
 	  </div>
     </div>
     <footer class="article-footer">
-      <a data-url="http://wustmeiming.github.io/2016/12/27/深度学习入门/" data-id="cixb874d3000cq8t02wmqtjsq" class="article-share-link">Share</a>
+      <a data-url="http://wustmeiming.github.io/2016/12/27/深度学习入门/" data-id="cixbghcnn000fr5t0sc5lg7zz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/深度学习/">深度学习</a></li></ul>
@@ -149,7 +205,7 @@
 	  </div>
     </div>
     <footer class="article-footer">
-      <a data-url="http://wustmeiming.github.io/2016/12/27/Matlab解析mnist数据库文件/" data-id="cixb874ch0000q8t0c7qrpcn0" class="article-share-link">Share</a>
+      <a data-url="http://wustmeiming.github.io/2016/12/27/Matlab解析mnist数据库文件/" data-id="cixbghcmz0000r5t02wvd3dga" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/图像处理/">图像处理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li></ul>
@@ -202,7 +258,7 @@
 	  </div>
     </div>
     <footer class="article-footer">
-      <a data-url="http://wustmeiming.github.io/2016/05/03/python文件操作归纳/" data-id="cixb874d00008q8t0qopg98mb" class="article-share-link">Share</a>
+      <a data-url="http://wustmeiming.github.io/2016/05/03/python文件操作归纳/" data-id="cixbghcnl000cr5t09bm171yy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/文件操作/">文件操作</a></li></ul>
@@ -251,7 +307,7 @@
 	  </div>
     </div>
     <footer class="article-footer">
-      <a data-url="http://wustmeiming.github.io/2016/04/18/hexo中的那些坑/" data-id="cixb874co0003q8t0vflpv20h" class="article-share-link">Share</a>
+      <a data-url="http://wustmeiming.github.io/2016/04/18/hexo中的那些坑/" data-id="cixbghcnb0003r5t0df3bozu6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/server/">server</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/端口/">端口</a></li></ul>
@@ -300,7 +356,7 @@
 	  </div>
     </div>
     <footer class="article-footer">
-      <a data-url="http://wustmeiming.github.io/2016/04/18/windows下配置git中的vim/" data-id="cixb874d3000aq8t0ecza5p6u" class="article-share-link">Share</a>
+      <a data-url="http://wustmeiming.github.io/2016/04/18/windows下配置git中的vim/" data-id="cixbghcnl000ar5t0rxusdx40" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/">vim</a></li></ul>
@@ -356,7 +412,7 @@
 	  </div>
     </div>
     <footer class="article-footer">
-      <a data-url="http://wustmeiming.github.io/2016/04/15/hexo博客使用本地图片/" data-id="cixb874ct0004q8t0x64pu8h4" class="article-share-link">Share</a>
+      <a data-url="http://wustmeiming.github.io/2016/04/15/hexo博客使用本地图片/" data-id="cixbghcnc0004r5t0fgc4r4ef" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/本地图片/">本地图片</a></li></ul>
@@ -407,7 +463,7 @@
 	  </div>
     </div>
     <footer class="article-footer">
-      <a data-url="http://wustmeiming.github.io/2016/04/15/axure旋转图像/" data-id="cixb874cl0001q8t0p0zrr2z6" class="article-share-link">Share</a>
+      <a data-url="http://wustmeiming.github.io/2016/04/15/axure旋转图像/" data-id="cixbghcn30001r5t0ic7frsxx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/axure/">axure</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/图像旋转/">图像旋转</a></li></ul>
@@ -456,7 +512,7 @@
 	  </div>
     </div>
     <footer class="article-footer">
-      <a data-url="http://wustmeiming.github.io/2016/04/14/hexo博客添加多说插件实现评论功能/" data-id="cixb874cw0005q8t0wt6twog8" class="article-share-link">Share</a>
+      <a data-url="http://wustmeiming.github.io/2016/04/14/hexo博客添加多说插件实现评论功能/" data-id="cixbghcnh0007r5t07nsprya4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多说插件/">多说插件</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/评论/">评论</a></li></ul>
@@ -509,7 +565,7 @@
 	  </div>
     </div>
     <footer class="article-footer">
-      <a data-url="http://wustmeiming.github.io/2016/04/14/hexo搭建静态博客/" data-id="cixb874cy0007q8t0snsqg3c6" class="article-share-link">Share</a>
+      <a data-url="http://wustmeiming.github.io/2016/04/14/hexo搭建静态博客/" data-id="cixbghcni0008r5t0c1j7b0dc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/静态博客/">静态博客</a></li></ul>
@@ -535,7 +591,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/axure/">axure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/server/">server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图像处理/">图像处理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图像旋转/">图像旋转</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多说插件/">多说插件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件操作/">文件操作</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/本地图片/">本地图片</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深度学习/">深度学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/端口/">端口</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/评论/">评论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/静态博客/">静态博客</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/axure/">axure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/server/">server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图像处理/">图像处理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图像旋转/">图像旋转</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多说插件/">多说插件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件操作/">文件操作</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/本地图片/">本地图片</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深度学习/">深度学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/端口/">端口</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/评论/">评论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/静态博客/">静态博客</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -545,7 +601,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/axure/" style="font-size: 10px;">axure</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/server/" style="font-size: 10px;">server</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/图像处理/" style="font-size: 10px;">图像处理</a> <a href="/tags/图像旋转/" style="font-size: 10px;">图像旋转</a> <a href="/tags/多说插件/" style="font-size: 10px;">多说插件</a> <a href="/tags/文件操作/" style="font-size: 10px;">文件操作</a> <a href="/tags/本地图片/" style="font-size: 10px;">本地图片</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/深度学习/" style="font-size: 10px;">深度学习</a> <a href="/tags/端口/" style="font-size: 10px;">端口</a> <a href="/tags/评论/" style="font-size: 10px;">评论</a> <a href="/tags/静态博客/" style="font-size: 10px;">静态博客</a>
+      <a href="/tags/axure/" style="font-size: 10px;">axure</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/server/" style="font-size: 10px;">server</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/图像处理/" style="font-size: 15px;">图像处理</a> <a href="/tags/图像旋转/" style="font-size: 10px;">图像旋转</a> <a href="/tags/多说插件/" style="font-size: 10px;">多说插件</a> <a href="/tags/文件操作/" style="font-size: 10px;">文件操作</a> <a href="/tags/本地图片/" style="font-size: 10px;">本地图片</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/深度学习/" style="font-size: 10px;">深度学习</a> <a href="/tags/端口/" style="font-size: 10px;">端口</a> <a href="/tags/评论/" style="font-size: 10px;">评论</a> <a href="/tags/静态博客/" style="font-size: 10px;">静态博客</a>
     </div>
   </div>
 
@@ -554,7 +610,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">6</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">6</span></li></ul>
     </div>
   </div>
 
@@ -565,6 +621,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/12/30/python图像处理入门-1/">python图像处理入门[1]</a>
+          </li>
         
           <li>
             <a href="/2016/12/27/深度学习入门/">深度学习入门</a>
@@ -580,10 +640,6 @@
         
           <li>
             <a href="/2016/04/18/hexo中的那些坑/">hexo中的那些坑</a>
-          </li>
-        
-          <li>
-            <a href="/2016/04/18/windows下配置git中的vim/">windows下配置git中的vim</a>
           </li>
         
       </ul>
