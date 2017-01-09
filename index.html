@@ -68,6 +68,54 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Tensorflow模型保存与使用-导入图方案" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/09/Tensorflow模型保存与使用-导入图方案/" class="article-date">
+  <time datetime="2017-01-09T09:33:51.000Z" itemprop="datePublished">2017-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/09/Tensorflow模型保存与使用-导入图方案/">Tensorflow模型保存与使用-导入图方案</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="&#x7B80;&#x8981;&#x4ECB;&#x7ECD;"><a href="#&#x7B80;&#x8981;&#x4ECB;&#x7ECD;" class="headerlink" title="&#x7B80;&#x8981;&#x4ECB;&#x7ECD;"></a>&#x7B80;&#x8981;&#x4ECB;&#x7ECD;</h2><p>&#x672C;&#x6587;&#x4E3B;&#x8981;&#x4ECB;&#x7ECD;&#xFF0C;&#x7528;tensorflow&#x8BAD;&#x7EC3;&#x7684;mnist&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x5982;&#x4F55;&#x4FDD;&#x5B58;&#x6A21;&#x578B;&#x548C;&#x4F7F;&#x7528;&#x4FDD;&#x5B58;&#x7684;&#x6A21;&#x578B;&#xFF0C;&#x4EE5;&#x53CA;&#x5982;&#x4F55;&#x5BF9;&#x4E00;&#x5F20;&#x6D4B;&#x8BD5;&#x56FE;&#x7247;&#x8FDB;&#x884C;&#x8BC6;&#x522B;&#xFF0C;&#x4F7F;&#x7528;&#x7684;&#x662F;&#x5BFC;&#x5165;&#x6A21;&#x578B;&#x7684;&#x7ED3;&#x6784;&#x7684;&#x65B9;&#x5F0F;</p>
+<h2 id="&#x6A21;&#x578B;&#x4FDD;&#x5B58;"><a href="#&#x6A21;&#x578B;&#x4FDD;&#x5B58;" class="headerlink" title="&#x6A21;&#x578B;&#x4FDD;&#x5B58;"></a>&#x6A21;&#x578B;&#x4FDD;&#x5B58;</h2><p>&#x6A21;&#x578B;&#x8BAD;&#x7EC3;&#x4E0E;&#x4FDD;&#x5B58;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># &#x5BFC;&#x5165;mnist&#x6570;&#x636E;&#x5E93;</span></div><div class="line"><span class="keyword">from</span> tensorflow.examples.tutorials.mnist <span class="keyword">import</span> input_data</div><div class="line">mnist = input_data.read_data_sets(<span class="string">&quot;MNIST_data/&quot;</span>, one_hot=<span class="keyword">True</span>)</div><div class="line"></div><div class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</div><div class="line"><span class="keyword">import</span> os</div><div class="line"></div><div class="line"><span class="comment"># &#x5B9A;&#x4E49;&#x8F93;&#x5165;&#x53D8;&#x91CF;</span></div><div class="line">x = tf.placeholder(tf.float32, [<span class="keyword">None</span>, <span class="number">784</span>])</div><div class="line"></div><div class="line"><span class="comment"># &#x5B9A;&#x4E49;&#x53C2;&#x6570;</span></div><div class="line">W = tf.Variable(tf.zeros([<span class="number">784</span>, <span class="number">10</span>]))</div><div class="line">b = tf.Variable(tf.zeros([<span class="number">10</span>]))</div><div class="line"></div><div class="line"><span class="comment"># &#x5B9A;&#x4E49;&#x6FC0;&#x52B1;&#x51FD;&#x6570;</span></div><div class="line">y = tf.nn.softmax(tf.matmul(x, W) + b)</div><div class="line"></div><div class="line"><span class="comment"># &#x5B9A;&#x4E49;&#x8F93;&#x51FA;&#x53D8;&#x91CF;</span></div><div class="line">y_ = tf.placeholder(tf.float32, [<span class="keyword">None</span>, <span class="number">10</span>])</div><div class="line"></div><div class="line"><span class="comment"># &#x5B9A;&#x4E49;&#x6210;&#x672C;&#x51FD;&#x6570;</span></div><div class="line">cross_entropy = tf.reduce_mean(-tf.reduce_sum(y_ * tf.log(y), reduction_indices=[<span class="number">1</span>]))</div><div class="line"></div><div class="line"><span class="comment"># &#x5B9A;&#x4E49;&#x4F18;&#x5316;&#x51FD;&#x6570;</span></div><div class="line">train_step = tf.train.GradientDescentOptimizer(<span class="number">0.5</span>).minimize(cross_entropy)</div><div class="line"></div><div class="line"><span class="comment"># &#x521D;&#x59CB;&#x5316;&#x53D8;&#x91CF;</span></div><div class="line">init = tf.global_variables_initializer()</div><div class="line"></div><div class="line"><span class="comment"># &#x5B9A;&#x4E49;&#x4F1A;&#x8BDD;</span></div><div class="line">sess = tf.Session()</div><div class="line"></div><div class="line"><span class="comment"># &#x8FD0;&#x884C;&#x521D;&#x59CB;&#x5316;</span></div><div class="line">sess.run(init)</div><div class="line"></div><div class="line"><span class="comment"># &#x5B9A;&#x4E49;&#x6A21;&#x578B;&#x4FDD;&#x5B58;&#x5BF9;&#x8C61;</span></div><div class="line">saver = tf.train.Saver()</div><div class="line"></div><div class="line">tf.add_to_collection(<span class="string">&apos;x&apos;</span>, x)</div><div class="line">tf.add_to_collection(<span class="string">&apos;y&apos;</span>, y)</div><div class="line"></div><div class="line"><span class="comment"># &#x5FAA;&#x73AF;&#x8BAD;&#x7EC3;1000&#x6B21;</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1000</span>):</div><div class="line">    batch_xs, batch_ys = mnist.train.next_batch(<span class="number">100</span>)</div><div class="line">    sess.run(train_step, feed_dict={x: batch_xs, y_:batch_ys})</div><div class="line"></div><div class="line">print(<span class="string">&quot;&#x8BAD;&#x7EC3;&#x5B8C;&#x6210;&#xFF01;&quot;</span>)</div><div class="line"></div><div class="line"><span class="comment"># &#x521B;&#x5EFA;&#x6A21;&#x578B;&#x4FDD;&#x5B58;&#x76EE;&#x5F55;</span></div><div class="line">model_dir = <span class="string">&quot;mnist_1&quot;</span></div><div class="line">model_name = <span class="string">&quot;ckp&quot;</span></div><div class="line"><span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(model_dir):</div><div class="line">    os.mkdir(model_dir)</div><div class="line"></div><div class="line"><span class="comment"># &#x4FDD;&#x5B58;&#x6A21;&#x578B;</span></div><div class="line">saver.save(sess, os.path.join(model_dir, model_name))</div><div class="line"></div><div class="line">print(<span class="string">&quot;&#x4FDD;&#x5B58;&#x6A21;&#x578B;&#x6210;&#x529F;&#xFF01;&quot;</span>)</div></pre></td></tr></table></figure></p>
+<h2 id="&#x6A21;&#x578B;&#x4F7F;&#x7528;"><a href="#&#x6A21;&#x578B;&#x4F7F;&#x7528;" class="headerlink" title="&#x6A21;&#x578B;&#x4F7F;&#x7528;"></a>&#x6A21;&#x578B;&#x4F7F;&#x7528;</h2><p>&#x6A21;&#x578B;&#x6062;&#x590D;&#x4E0E;&#x4F7F;&#x7528;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># &#x5BFC;&#x5165;mnist&#x6570;&#x636E;&#x5E93;</span></div><div class="line"><span class="keyword">from</span> tensorflow.examples.tutorials.mnist <span class="keyword">import</span> input_data</div><div class="line">mnist=input_data.read_data_sets(<span class="string">&quot;MNIST_data&quot;</span>,one_hot=<span class="keyword">True</span>)</div><div class="line"></div><div class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</div><div class="line"></div><div class="line"><span class="comment"># &#x521B;&#x5EFA;&#x4F1A;&#x8BDD;</span></div><div class="line">sess = tf.Session()</div><div class="line"></div><div class="line">new_saver = tf.train.import_meta_graph(<span class="string">&apos;mnist_1/ckp.meta&apos;</span>)</div><div class="line">new_saver.restore(sess, <span class="string">&apos;mnist_1/ckp&apos;</span>)</div><div class="line"></div><div class="line">x = tf.get_collection(<span class="string">&apos;x&apos;</span>)[<span class="number">0</span>]</div><div class="line">y = tf.get_collection(<span class="string">&apos;y&apos;</span>)[<span class="number">0</span>]</div><div class="line"></div><div class="line">print(<span class="string">&quot;&#x6062;&#x590D;&#x6A21;&#x578B;&#x6210;&#x529F;&#xFF01;&quot;</span>)</div><div class="line"></div><div class="line"><span class="comment"># &#x53D6;&#x51FA;&#x4E00;&#x4E2A;&#x6D4B;&#x8BD5;&#x56FE;&#x7247;</span></div><div class="line">idx = <span class="number">0</span></div><div class="line">img = mnist.test.images[idx]</div><div class="line"></div><div class="line"><span class="comment"># &#x6839;&#x636E;&#x6A21;&#x578B;&#x8BA1;&#x7B97;&#x7ED3;&#x679C;</span></div><div class="line">ret = sess.run(y, feed_dict = {x : img.reshape(<span class="number">1</span>, <span class="number">784</span>)})</div><div class="line"></div><div class="line">print(<span class="string">&quot;&#x8BA1;&#x7B97;&#x6A21;&#x578B;&#x7ED3;&#x679C;&#x6210;&#x529F;&#xFF01;&quot;</span>)</div><div class="line"></div><div class="line"><span class="comment"># &#x663E;&#x793A;&#x6D4B;&#x8BD5;&#x7ED3;&#x679C;</span></div><div class="line">print(<span class="string">&quot;&#x9884;&#x6D4B;&#x7ED3;&#x679C;:%d&quot;</span>%(ret.argmax()))</div><div class="line">print(<span class="string">&quot;&#x5B9E;&#x9645;&#x7ED3;&#x679C;:%d&quot;</span>%(mnist.test.labels[idx].argmax()))</div></pre></td></tr></table></figure></p>
+<h2 id="&#x9644;&#x4EF6;&#xFF1A;"><a href="#&#x9644;&#x4EF6;&#xFF1A;" class="headerlink" title="&#x9644;&#x4EF6;&#xFF1A;"></a>&#x9644;&#x4EF6;&#xFF1A;</h2><p>&#x8BAD;&#x7EC3;&#x811A;&#x672C;&#xFF1A;<a href="/2017/01/09/Tensorflow&#x6A21;&#x578B;&#x4FDD;&#x5B58;&#x4E0E;&#x4F7F;&#x7528;-&#x5BFC;&#x5165;&#x56FE;&#x65B9;&#x6848;/mnist_train_1.py">mnist_train_1.py</a><br>&#x6D4B;&#x8BD5;&#x811A;&#x672C;&#xFF1A;<a href="/2017/01/09/Tensorflow&#x6A21;&#x578B;&#x4FDD;&#x5B58;&#x4E0E;&#x4F7F;&#x7528;-&#x5BFC;&#x5165;&#x56FE;&#x65B9;&#x6848;/mnist_test_1.py">mnist_test_1.py</a></p>
+
+      
+	  <div>
+	  <br/>
+	  &nbsp;&nbsp;转载请注明出处：<a href="http://wustmeiming.github.io/2017/01/09/Tensorflow模型保存与使用-导入图方案/">http://wustmeiming.github.io/2017/01/09/Tensorflow模型保存与使用-导入图方案/</a>
+	  </div>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://wustmeiming.github.io/2017/01/09/Tensorflow模型保存与使用-导入图方案/" data-id="cixpwcf2k00013kt0kbuulpa6" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mnist数据库/">mnist数据库</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tensorflow/">tensorflow</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
     <article id="post-Tensorflow模型保存与使用" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/01/09/Tensorflow模型保存与使用/" class="article-date">
@@ -102,7 +150,7 @@
 	  </div>
     </div>
     <footer class="article-footer">
-      <a data-url="http://wustmeiming.github.io/2017/01/09/Tensorflow模型保存与使用/" data-id="cixpt2nqz0000dct0s7bye11a" class="article-share-link">Share</a>
+      <a data-url="http://wustmeiming.github.io/2017/01/09/Tensorflow模型保存与使用/" data-id="cixpwcf2n00033kt00axjya6n" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mnist数据库/">mnist数据库</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tensorflow/">tensorflow</a></li></ul>
@@ -148,7 +196,7 @@
 	  </div>
     </div>
     <footer class="article-footer">
-      <a data-url="http://wustmeiming.github.io/2016/12/30/深度学习资料/" data-id="cixpt2nri000cdct06zjonixi" class="article-share-link">Share</a>
+      <a data-url="http://wustmeiming.github.io/2016/12/30/深度学习资料/" data-id="cixpwcf32000k3kt0hewyjnsp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/深度学习/">深度学习</a></li></ul>
@@ -207,7 +255,7 @@
 	  </div>
     </div>
     <footer class="article-footer">
-      <a data-url="http://wustmeiming.github.io/2016/12/30/python图像处理入门-1/" data-id="cixpt2nre0007dct052quis5w" class="article-share-link">Share</a>
+      <a data-url="http://wustmeiming.github.io/2016/12/30/python图像处理入门-1/" data-id="cixpwcf2y000c3kt0w28wp867" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/图像处理/">图像处理</a></li></ul>
@@ -255,7 +303,7 @@
 	  </div>
     </div>
     <footer class="article-footer">
-      <a data-url="http://wustmeiming.github.io/2016/12/27/深度学习入门/" data-id="cixpt2nrl000gdct0go024vts" class="article-share-link">Share</a>
+      <a data-url="http://wustmeiming.github.io/2016/12/27/深度学习入门/" data-id="cixpwcf31000i3kt013r71177" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/深度学习/">深度学习</a></li></ul>
@@ -302,7 +350,7 @@
 	  </div>
     </div>
     <footer class="article-footer">
-      <a data-url="http://wustmeiming.github.io/2016/12/27/Matlab解析mnist数据库文件/" data-id="cixpt2nr20001dct04kpojqcc" class="article-share-link">Share</a>
+      <a data-url="http://wustmeiming.github.io/2016/12/27/Matlab解析mnist数据库文件/" data-id="cixpwcf2c00003kt0ix6fejjg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/图像处理/">图像处理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li></ul>
@@ -355,7 +403,7 @@
 	  </div>
     </div>
     <footer class="article-footer">
-      <a data-url="http://wustmeiming.github.io/2016/05/03/python文件操作归纳/" data-id="cixpt2nrj000fdct0365yfcat" class="article-share-link">Share</a>
+      <a data-url="http://wustmeiming.github.io/2016/05/03/python文件操作归纳/" data-id="cixpwcf2z000f3kt0murkgobh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/文件操作/">文件操作</a></li></ul>
@@ -404,7 +452,7 @@
 	  </div>
     </div>
     <footer class="article-footer">
-      <a data-url="http://wustmeiming.github.io/2016/04/18/hexo中的那些坑/" data-id="cixpt2nr60004dct055whb2j7" class="article-share-link">Share</a>
+      <a data-url="http://wustmeiming.github.io/2016/04/18/hexo中的那些坑/" data-id="cixpwcf2q00053kt0osleowog" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/server/">server</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/端口/">端口</a></li></ul>
@@ -453,7 +501,7 @@
 	  </div>
     </div>
     <footer class="article-footer">
-      <a data-url="http://wustmeiming.github.io/2016/04/18/windows下配置git中的vim/" data-id="cixpt2nrm000idct0pvkey08c" class="article-share-link">Share</a>
+      <a data-url="http://wustmeiming.github.io/2016/04/18/windows下配置git中的vim/" data-id="cixpwcf30000g3kt0lf23wd2t" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/">vim</a></li></ul>
@@ -509,61 +557,10 @@
 	  </div>
     </div>
     <footer class="article-footer">
-      <a data-url="http://wustmeiming.github.io/2016/04/15/hexo博客使用本地图片/" data-id="cixpt2nrf0008dct0sxvxwir8" class="article-share-link">Share</a>
+      <a data-url="http://wustmeiming.github.io/2016/04/15/hexo博客使用本地图片/" data-id="cixpwcf2x000a3kt03yg3u9d3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/本地图片/">本地图片</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-axure旋转图像" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/04/15/axure旋转图像/" class="article-date">
-  <time datetime="2016-04-15T05:32:40.000Z" itemprop="datePublished">2016-04-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/15/axure旋转图像/">Axure旋转图像</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Axure&#x4E2D;&#x65CB;&#x8F6C;&#x56FE;&#x50CF;"><a href="#Axure&#x4E2D;&#x65CB;&#x8F6C;&#x56FE;&#x50CF;" class="headerlink" title="Axure&#x4E2D;&#x65CB;&#x8F6C;&#x56FE;&#x50CF;"></a>Axure&#x4E2D;&#x65CB;&#x8F6C;&#x56FE;&#x50CF;</h2><p>&#x4ECA;&#x5929;&#x505A;&#x539F;&#x578B;&#x8BBE;&#x8BA1;&#xFF0C;&#x8981;&#x65CB;&#x8F6C;&#x56FE;&#x50CF;&#xFF0C;&#x4E00;&#x65F6;&#x6CA1;&#x53D1;&#x73B0;&#xFF0C;&#x4E0D;&#x80FD;&#x7528;&#x9F20;&#x6807;&#x76F4;&#x63A5;&#x65CB;&#x8F6C;&#xFF0C;&#x63A2;&#x7D22;&#x4E86;&#x4E00;&#x4E0B;&#xFF0C;&#x53D1;&#x73B0;&#x4E24;&#x79CD;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#xFF1A;</p>
-<ol>
-<li>&#x9009;&#x4E2D;&#x56FE;&#x7247;&#xFF0C;&#x4E4B;&#x540E;&#x9009;&#x62E9;Widget Properties and Style&#x9009;&#x5361;&#x4E2D;&#x7684;Style&#x9009;&#x5361;&#xFF0C;&#x5982;&#x4E0B;&#x56FE;&#x6240;&#x793A;</li></ol>
-        
-          <p class="article-more-link">
-            <a href="/2016/04/15/axure旋转图像/#more">更多</a>
-          </p>
-        
-      
-	  <div>
-	  <br/>
-	  &nbsp;&nbsp;转载请注明出处：<a href="http://wustmeiming.github.io/2016/04/15/axure旋转图像/">http://wustmeiming.github.io/2016/04/15/axure旋转图像/</a>
-	  </div>
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://wustmeiming.github.io/2016/04/15/axure旋转图像/" data-id="cixpt2nr60003dct0la4zsg5o" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/axure/">axure</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/图像旋转/">图像旋转</a></li></ul>
 
     </footer>
   </div>
@@ -590,7 +587,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/axure/">axure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mnist数据库/">mnist数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/server/">server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/">tensorflow</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图像处理/">图像处理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图像旋转/">图像旋转</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多说插件/">多说插件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件操作/">文件操作</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/本地图片/">本地图片</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深度学习/">深度学习</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/端口/">端口</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/评论/">评论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/静态博客/">静态博客</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/axure/">axure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mnist数据库/">mnist数据库</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/server/">server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/">tensorflow</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图像处理/">图像处理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图像旋转/">图像旋转</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多说插件/">多说插件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件操作/">文件操作</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/本地图片/">本地图片</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深度学习/">深度学习</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/端口/">端口</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/评论/">评论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/静态博客/">静态博客</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -600,7 +597,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/axure/" style="font-size: 10px;">axure</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/mnist数据库/" style="font-size: 10px;">mnist数据库</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/server/" style="font-size: 10px;">server</a> <a href="/tags/tensorflow/" style="font-size: 10px;">tensorflow</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/图像处理/" style="font-size: 15px;">图像处理</a> <a href="/tags/图像旋转/" style="font-size: 10px;">图像旋转</a> <a href="/tags/多说插件/" style="font-size: 10px;">多说插件</a> <a href="/tags/文件操作/" style="font-size: 10px;">文件操作</a> <a href="/tags/本地图片/" style="font-size: 10px;">本地图片</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/深度学习/" style="font-size: 15px;">深度学习</a> <a href="/tags/端口/" style="font-size: 10px;">端口</a> <a href="/tags/评论/" style="font-size: 10px;">评论</a> <a href="/tags/静态博客/" style="font-size: 10px;">静态博客</a>
+      <a href="/tags/axure/" style="font-size: 10px;">axure</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/mnist数据库/" style="font-size: 15px;">mnist数据库</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/server/" style="font-size: 10px;">server</a> <a href="/tags/tensorflow/" style="font-size: 15px;">tensorflow</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/图像处理/" style="font-size: 15px;">图像处理</a> <a href="/tags/图像旋转/" style="font-size: 10px;">图像旋转</a> <a href="/tags/多说插件/" style="font-size: 10px;">多说插件</a> <a href="/tags/文件操作/" style="font-size: 10px;">文件操作</a> <a href="/tags/本地图片/" style="font-size: 10px;">本地图片</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/深度学习/" style="font-size: 15px;">深度学习</a> <a href="/tags/端口/" style="font-size: 10px;">端口</a> <a href="/tags/评论/" style="font-size: 10px;">评论</a> <a href="/tags/静态博客/" style="font-size: 10px;">静态博客</a>
     </div>
   </div>
 
@@ -609,7 +606,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">6</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">6</span></li></ul>
     </div>
   </div>
 
@@ -620,6 +617,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/01/09/Tensorflow模型保存与使用-导入图方案/">Tensorflow模型保存与使用-导入图方案</a>
+          </li>
         
           <li>
             <a href="/2017/01/09/Tensorflow模型保存与使用/">Tensorflow模型保存与使用</a>
@@ -635,10 +636,6 @@
         
           <li>
             <a href="/2016/12/27/深度学习入门/">深度学习入门</a>
-          </li>
-        
-          <li>
-            <a href="/2016/12/27/Matlab解析mnist数据库文件/">Matlab解析mnist数据库文件</a>
           </li>
         
       </ul>
