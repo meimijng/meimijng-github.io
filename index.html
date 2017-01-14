@@ -68,6 +68,66 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-tensorflow在android上的demo加入mnist手写数字识别" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/14/tensorflow在android上的demo加入mnist手写数字识别/" class="article-date">
+  <time datetime="2017-01-14T11:46:42.000Z" itemprop="datePublished">2017-01-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/14/tensorflow在android上的demo加入mnist手写数字识别/">tensorflow在android上的demo加入mnist手写数字识别</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-&#x4E0B;&#x8F7D;tensorflow&#x6E90;&#x4EE3;&#x7801;"><a href="#1-&#x4E0B;&#x8F7D;tensorflow&#x6E90;&#x4EE3;&#x7801;" class="headerlink" title="1.&#x4E0B;&#x8F7D;tensorflow&#x6E90;&#x4EE3;&#x7801;"></a>1.&#x4E0B;&#x8F7D;tensorflow&#x6E90;&#x4EE3;&#x7801;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> https://github.com/tensorflow/tensorflow.git</div></pre></td></tr></table></figure>
+<p>&#x5047;&#x8BBE;tensorflow&#x7684;&#x6839;&#x76EE;&#x5F55;&#x4E3A; TENSORFLOW_ROOT</p>
+<h2 id="2-&#x8BAD;&#x7EC3;&#x6A21;&#x578B;"><a href="#2-&#x8BAD;&#x7EC3;&#x6A21;&#x578B;" class="headerlink" title="2.&#x8BAD;&#x7EC3;&#x6A21;&#x578B;"></a>2.&#x8BAD;&#x7EC3;&#x6A21;&#x578B;</h2><p>&#x8BAD;&#x7EC3;&#x7684;&#x6A21;&#x578B;&#x91C7;&#x7528;&#x662F;&#x6700;&#x7B80;&#x5355;&#x7684;&#x6A21;&#x578B;&#xFF0C;&#x8BAD;&#x7EC3;&#x811A;&#x672C;&#x5982;&#x4E0B;&#xFF1A;<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</div><div class="line"><span class="keyword">import</span> os.path</div><div class="line"></div><div class="line"><span class="comment"># Import data</span></div><div class="line"><span class="keyword">from</span> tensorflow.examples.tutorials.mnist <span class="keyword">import</span> input_data</div><div class="line"></div><div class="line">mnist = input_data.read_data_sets(<span class="string">&quot;data/&quot;</span>, one_hot=<span class="keyword">True</span>)</div><div class="line"></div><div class="line">g = tf.Graph()</div><div class="line"></div><div class="line"><span class="keyword">with</span> g.as_default():</div><div class="line">    <span class="comment"># Create the model</span></div><div class="line">    x = tf.placeholder(tf.float32, [<span class="keyword">None</span>, <span class="number">784</span>])</div><div class="line">    W = tf.Variable(tf.zeros([<span class="number">784</span>, <span class="number">10</span>]), name=<span class="string">&quot;vaiable_W&quot;</span>)</div><div class="line">    b = tf.Variable(tf.zeros([<span class="number">10</span>]), name=<span class="string">&quot;variable_b&quot;</span>)</div><div class="line">    y = tf.nn.softmax(tf.matmul(x, W) + b)</div><div class="line">    </div><div class="line">    <span class="comment"># Define loss and optimizer</span></div><div class="line">    y_ = tf.placeholder(tf.float32, [<span class="keyword">None</span>, <span class="number">10</span>])</div><div class="line">    cross_entropy = -tf.reduce_sum(y_ * tf.log(y))</div><div class="line">    train_step = tf.train.GradientDescentOptimizer(<span class="number">0.01</span>).minimize(cross_entropy)</div><div class="line">    </div><div class="line">    sess = tf.Session()</div><div class="line">    </div><div class="line">    <span class="comment"># Train</span></div><div class="line">    init = tf.global_variables_initializer()</div><div class="line">    sess.run(init)</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1000</span>):</div><div class="line">        batch_xs, batch_ys = mnist.train.next_batch(<span class="number">100</span>)</div><div class="line">        train_step.run({x: batch_xs, y_: batch_ys}, sess)</div><div class="line">    </div><div class="line">    <span class="comment"># Test trained model</span></div><div class="line">    correct_prediction = tf.equal(tf.argmax(y, <span class="number">1</span>), tf.argmax(y_, <span class="number">1</span>))</div><div class="line">    accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))</div><div class="line">    </div><div class="line">    print(accuracy.eval({x: mnist.test.images, y_: mnist.test.labels}, sess))</div><div class="line">    </div><div class="line"><span class="comment"># Store variable</span></div><div class="line">_W = W.eval(sess)</div><div class="line">_b = b.eval(sess)</div><div class="line"></div><div class="line">sess.close()</div><div class="line"></div><div class="line"><span class="comment"># Create new graph for exporting</span></div><div class="line">g_2 = tf.Graph()</div><div class="line"><span class="keyword">with</span> g_2.as_default():</div><div class="line">    <span class="comment"># Reconstruct graph</span></div><div class="line">    x_2 = tf.placeholder(tf.float32, [<span class="keyword">None</span>, <span class="number">784</span>], name=<span class="string">&quot;input&quot;</span>)</div><div class="line">    W_2 = tf.constant(_W, name=<span class="string">&quot;constant_W&quot;</span>)</div><div class="line">    b_2 = tf.constant(_b, name=<span class="string">&quot;constant_b&quot;</span>)</div><div class="line">    y_2 = tf.nn.softmax(tf.matmul(x_2, W_2) + b_2, name=<span class="string">&quot;output&quot;</span>)</div><div class="line">    </div><div class="line">    sess_2 = tf.Session()</div><div class="line">    </div><div class="line">    init_2 = tf.global_variables_initializer()</div><div class="line">    sess_2.run(init_2)</div><div class="line">    </div><div class="line">    graph_def = g_2.as_graph_def()</div><div class="line">    </div><div class="line">    tf.train.write_graph(graph_def, <span class="string">&apos;./model/beginner-export&apos;</span>,</div><div class="line">			                         <span class="string">&apos;beginner-graph.pb&apos;</span>, as_text=<span class="keyword">False</span>)</div></pre></td></tr></table></figure></p>
+<p>&#x8BAD;&#x7EC3;&#x5B8C;&#x6210;&#x4E4B;&#x540E;&#xFF0C;&#x5F97;&#x5230;&#x4E86;&#x6A21;&#x578B;&#x6587;&#x4EF6; beginner-graph.pb</p>
+<h2 id="3-&#x66FF;&#x6362;&#x6A21;&#x578B;"><a href="#3-&#x66FF;&#x6362;&#x6A21;&#x578B;" class="headerlink" title="3.&#x66FF;&#x6362;&#x6A21;&#x578B;"></a>3.&#x66FF;&#x6362;&#x6A21;&#x578B;</h2><p>android&#x4F8B;&#x5B50;&#x7684;&#x4F4D;&#x7F6E;&#x5728;TENSORFLOW_ROOT/tensorflow/examples/android&#x76EE;&#x5F55;&#x4E0B;&#x9762;<br>&#x62F7;&#x8D1D;&#x4E0A;&#x4E00;&#x6B65;&#x751F;&#x6210;&#x7684;&#x6A21;&#x578B;&#x6587;&#x4EF6;&#x5230; assets&#x76EE;&#x5F55;&#x4E0B;&#x9762;<br>&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;&#x6807;&#x7B7E;&#x6587;&#x4EF6; mnist_labels.txt &#x653E;&#x5165; assets&#x76EE;&#x5F55;&#x4E0B;&#x9762;<br>&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x5982;&#x4E0B;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">0</div><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td></tr></table></figure></p>
+<h2 id="4-&#x4FEE;&#x6539;&#x6E90;&#x7801;"><a href="#4-&#x4FEE;&#x6539;&#x6E90;&#x7801;" class="headerlink" title="4.&#x4FEE;&#x6539;&#x6E90;&#x7801;"></a>4.&#x4FEE;&#x6539;&#x6E90;&#x7801;</h2><p>&#x9996;&#x5148;&#x4FEE;&#x6539; org.tensorflow.demo &#x5305;&#x4E0B;&#x9762;&#x7684; ClassifierActivity.java &#x6587;&#x4EF6;<br>&#x4FEE;&#x6539;&#x524D;:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> NUM_CLASSES = <span class="number">1001</span>;</div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INPUT_SIZE = <span class="number">224</span>;</div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> IMAGE_MEAN = <span class="number">117</span>;</div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">float</span> IMAGE_STD = <span class="number">1</span>;</div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String INPUT_NAME = <span class="string">&quot;input:0&quot;</span>;</div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String OUTPUT_NAME = <span class="string">&quot;output:0&quot;</span>;</div><div class="line"></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String MODEL_FILE = <span class="string">&quot;file:///android_asset/tensorflow_inception_graph.pb&quot;</span>;</div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String LABEL_FILE = <span class="string">&quot;file:///android_asset/imagenet_comp_graph_label_strings.txt&quot;</span>;</div></pre></td></tr></table></figure></p>
+<p>&#x4FEE;&#x6539;&#x540E;:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> NUM_CLASSES = <span class="number">10</span>; <span class="comment">// 10&#x7C7B;[0-9]</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INPUT_SIZE = <span class="number">28</span>;  <span class="comment">// &#x56FE;&#x50CF;&#x5C3A;&#x5BF8;28*28</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> IMAGE_MEAN = <span class="number">117</span>;</div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">float</span> IMAGE_STD = <span class="number">1</span>;</div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String INPUT_NAME = <span class="string">&quot;input&quot;</span>;	<span class="comment">// &#x8F93;&#x5165;&#x8282;&#x70B9;&#x540D;&#x79F0;</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String OUTPUT_NAME = <span class="string">&quot;output&quot;</span>; <span class="comment">// &#x8F93;&#x51FA;&#x8282;&#x70B9;&#x540D;&#x79F0;</span></div><div class="line"></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String MODEL_FILE = <span class="string">&quot;file:///android_asset/beginner-graph.pb&quot;</span>;</div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String LABEL_FILE = <span class="string">&quot;file:///android_asset/mnist_labels.txt&quot;</span>;</div></pre></td></tr></table></figure></p>
+<p>&#x63A5;&#x7740;&#x4FEE;&#x6539; TensorFlowImageClassifier.java &#x6587;&#x4EF6;&#x4E2D;&#x7684;<br>&#x51FD;&#x6570;1:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">initializeTensorFlow</span><span class="params">()</span></span>{}</div></pre></td></tr></table></figure></p>
+<p>&#x4FEE;&#x6539;&#x524D;:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Pre-allocate buffers.</span></div><div class="line">outputNames = <span class="keyword">new</span> String[] {outputName};</div><div class="line">intValues = <span class="keyword">new</span> <span class="keyword">int</span>[inputSize * inputSize];</div><div class="line">floatValues = <span class="keyword">new</span> <span class="keyword">float</span>[inputSize * inputSize * <span class="number">3</span>];</div><div class="line">outputs = <span class="keyword">new</span> <span class="keyword">float</span>[numClasses];</div></pre></td></tr></table></figure></p>
+<p>&#x4FEE;&#x6539;&#x540E;:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Pre-allocate buffers.</span></div><div class="line">outputNames = <span class="keyword">new</span> String[] {outputName};</div><div class="line">intValues = <span class="keyword">new</span> <span class="keyword">int</span>[inputSize * inputSize];</div><div class="line">floatValues = <span class="keyword">new</span> <span class="keyword">float</span>[inputSize * inputSize];</div><div class="line">outputs = <span class="keyword">new</span> <span class="keyword">float</span>[numClasses];</div></pre></td></tr></table></figure></p>
+<p>&#x51FD;&#x6570;2:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> List&lt;Recognition&gt; <span class="title">recognizeImage</span><span class="params">(<span class="keyword">final</span> Bitmap bitmap)</span> </span>{}</div></pre></td></tr></table></figure></p>
+<p>&#x4FEE;&#x6539;&#x524D;:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">Trace.beginSection(<span class="string">&quot;preprocessBitmap&quot;</span>);</div><div class="line"><span class="comment">// Preprocess the image data from 0-255 int to normalized float based</span></div><div class="line"><span class="comment">// on the provided parameters.</span></div><div class="line">bitmap.getPixels(intValues, <span class="number">0</span>, bitmap.getWidth(), <span class="number">0</span>, <span class="number">0</span>, bitmap.getWidth(), bitmap.getHeight());</div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; intValues.length; ++i) {</div><div class="line">	<span class="keyword">final</span> <span class="keyword">int</span> val = intValues[i];</div><div class="line">	floatValues[i * <span class="number">3</span> + <span class="number">0</span>] = (((val &gt;&gt; <span class="number">16</span>) &amp; <span class="number">0xFF</span>) - imageMean) / imageStd;</div><div class="line">	floatValues[i * <span class="number">3</span> + <span class="number">1</span>] = (((val &gt;&gt; <span class="number">8</span>) &amp; <span class="number">0xFF</span>) - imageMean) / imageStd;</div><div class="line">	floatValues[i * <span class="number">3</span> + <span class="number">2</span>] = ((val &amp; <span class="number">0xFF</span>) - imageMean) / imageStd;</div><div class="line">}</div><div class="line">Trace.endSection();</div><div class="line"></div><div class="line"><span class="comment">// Copy the input data into TensorFlow.</span></div><div class="line">Trace.beginSection(<span class="string">&quot;fillNodeFloat&quot;</span>);</div><div class="line">inferenceInterface.fillNodeFloat(inputName, <span class="keyword">new</span> <span class="keyword">int</span>[] {<span class="number">1</span>, inputSize, inputSize, <span class="number">3</span>}, floatValues);</div><div class="line">Trace.endSection();</div></pre></td></tr></table></figure></p>
+<p>&#x4FEE;&#x6539;&#x540E;:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">Trace.beginSection(<span class="string">&quot;preprocessBitmap&quot;</span>);</div><div class="line"><span class="comment">// Preprocess the image data from 0-255 int to normalized float based</span></div><div class="line"><span class="comment">// on the provided parameters.</span></div><div class="line">bitmap.getPixels(intValues, <span class="number">0</span>, bitmap.getWidth(), <span class="number">0</span>, <span class="number">0</span>, bitmap.getWidth(), bitmap.getHeight());</div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; intValues.length; ++i) {</div><div class="line">	<span class="keyword">final</span> <span class="keyword">int</span> val = intValues[i];</div><div class="line">	<span class="keyword">int</span> R = (val &gt;&gt; <span class="number">16</span>) &amp; <span class="number">0xFF</span>;</div><div class="line">	<span class="keyword">int</span> G = (val &gt;&gt; <span class="number">8</span>) &amp; <span class="number">0xFF</span>;</div><div class="line">	<span class="keyword">int</span> B = val &amp; <span class="number">0xFF</span>;</div><div class="line">	<span class="keyword">float</span> Y = (<span class="keyword">float</span>)(<span class="number">1</span>-(<span class="number">0.3</span>*R + <span class="number">0.59</span>*G + <span class="number">0.11</span>*B)/<span class="number">255</span>);</div><div class="line">	floatValues[i] = Y&gt;<span class="number">0.2</span>?Y:<span class="number">0</span>;</div><div class="line">}</div><div class="line">Trace.endSection();</div><div class="line"></div><div class="line"><span class="comment">// Copy the input data into TensorFlow.</span></div><div class="line">Trace.beginSection(<span class="string">&quot;fillNodeFloat&quot;</span>);</div><div class="line">inferenceInterface.fillNodeFloat(inputName, <span class="keyword">new</span> <span class="keyword">int</span>[] {<span class="number">1</span>, inputSize*inputSize}, floatValues);</div><div class="line">Trace.endSection();</div></pre></td></tr></table></figure></p>
+<h2 id="5-&#x7F16;&#x8BD1;&#x8FD0;&#x884C;"><a href="#5-&#x7F16;&#x8BD1;&#x8FD0;&#x884C;" class="headerlink" title="5.&#x7F16;&#x8BD1;&#x8FD0;&#x884C;"></a>5.&#x7F16;&#x8BD1;&#x8FD0;&#x884C;</h2><p>&#x7F16;&#x8BD1;apk<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bazel build //tensorflow/examples/android:tensorflow_demo</div></pre></td></tr></table></figure></p>
+<p>&#x5B89;&#x88C5;apk<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb install -r bazel-bin/tensorflow/examples/android/tensorflow_demo.apk</div></pre></td></tr></table></figure></p>
+<p>&#x8FD0;&#x884C;TF Classify&#x7A0B;&#x5E8F;</p>
+
+      
+	  <div>
+	  <br/>
+	  &nbsp;&nbsp;转载请注明出处：<a href="http://wustmeiming.github.io/2017/01/14/tensorflow在android上的demo加入mnist手写数字识别/">http://wustmeiming.github.io/2017/01/14/tensorflow在android上的demo加入mnist手写数字识别/</a>
+	  </div>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://wustmeiming.github.io/2017/01/14/tensorflow在android上的demo加入mnist手写数字识别/" data-id="cixx7v7a6000c4bt06el6w9xn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mnist/">mnist</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tensorflow/">tensorflow</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
     <article id="post-Tensorflow模型保存与使用-导入图方案" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/01/09/Tensorflow模型保存与使用-导入图方案/" class="article-date">
@@ -102,7 +162,7 @@
 	  </div>
     </div>
     <footer class="article-footer">
-      <a data-url="http://wustmeiming.github.io/2017/01/09/Tensorflow模型保存与使用-导入图方案/" data-id="cixpwcf2k00013kt0kbuulpa6" class="article-share-link">Share</a>
+      <a data-url="http://wustmeiming.github.io/2017/01/09/Tensorflow模型保存与使用-导入图方案/" data-id="cixx7v79n00014bt029iz5mva" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mnist数据库/">mnist数据库</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tensorflow/">tensorflow</a></li></ul>
@@ -150,7 +210,7 @@
 	  </div>
     </div>
     <footer class="article-footer">
-      <a data-url="http://wustmeiming.github.io/2017/01/09/Tensorflow模型保存与使用/" data-id="cixpwcf2n00033kt00axjya6n" class="article-share-link">Share</a>
+      <a data-url="http://wustmeiming.github.io/2017/01/09/Tensorflow模型保存与使用/" data-id="cixx7v79y00034bt0d1pmrqlx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mnist数据库/">mnist数据库</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tensorflow/">tensorflow</a></li></ul>
@@ -196,7 +256,7 @@
 	  </div>
     </div>
     <footer class="article-footer">
-      <a data-url="http://wustmeiming.github.io/2016/12/30/深度学习资料/" data-id="cixpwcf32000k3kt0hewyjnsp" class="article-share-link">Share</a>
+      <a data-url="http://wustmeiming.github.io/2016/12/30/深度学习资料/" data-id="cixx7v7ab000k4bt0h3wbcuut" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/深度学习/">深度学习</a></li></ul>
@@ -255,7 +315,7 @@
 	  </div>
     </div>
     <footer class="article-footer">
-      <a data-url="http://wustmeiming.github.io/2016/12/30/python图像处理入门-1/" data-id="cixpwcf2y000c3kt0w28wp867" class="article-share-link">Share</a>
+      <a data-url="http://wustmeiming.github.io/2016/12/30/python图像处理入门-1/" data-id="cixx7v7a7000f4bt0ftv6wm71" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/图像处理/">图像处理</a></li></ul>
@@ -303,7 +363,7 @@
 	  </div>
     </div>
     <footer class="article-footer">
-      <a data-url="http://wustmeiming.github.io/2016/12/27/深度学习入门/" data-id="cixpwcf31000i3kt013r71177" class="article-share-link">Share</a>
+      <a data-url="http://wustmeiming.github.io/2016/12/27/深度学习入门/" data-id="cixx7v7ac000n4bt033sqax7q" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/深度学习/">深度学习</a></li></ul>
@@ -350,7 +410,7 @@
 	  </div>
     </div>
     <footer class="article-footer">
-      <a data-url="http://wustmeiming.github.io/2016/12/27/Matlab解析mnist数据库文件/" data-id="cixpwcf2c00003kt0ix6fejjg" class="article-share-link">Share</a>
+      <a data-url="http://wustmeiming.github.io/2016/12/27/Matlab解析mnist数据库文件/" data-id="cixx7v79k00004bt0rv2egtdh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/图像处理/">图像处理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li></ul>
@@ -403,7 +463,7 @@
 	  </div>
     </div>
     <footer class="article-footer">
-      <a data-url="http://wustmeiming.github.io/2016/05/03/python文件操作归纳/" data-id="cixpwcf2z000f3kt0murkgobh" class="article-share-link">Share</a>
+      <a data-url="http://wustmeiming.github.io/2016/05/03/python文件操作归纳/" data-id="cixx7v7a9000g4bt0emyn9ip5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/文件操作/">文件操作</a></li></ul>
@@ -452,7 +512,7 @@
 	  </div>
     </div>
     <footer class="article-footer">
-      <a data-url="http://wustmeiming.github.io/2016/04/18/hexo中的那些坑/" data-id="cixpwcf2q00053kt0osleowog" class="article-share-link">Share</a>
+      <a data-url="http://wustmeiming.github.io/2016/04/18/hexo中的那些坑/" data-id="cixx7v7a000054bt0e4j6ovkn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/server/">server</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/端口/">端口</a></li></ul>
@@ -501,66 +561,10 @@
 	  </div>
     </div>
     <footer class="article-footer">
-      <a data-url="http://wustmeiming.github.io/2016/04/18/windows下配置git中的vim/" data-id="cixpwcf30000g3kt0lf23wd2t" class="article-share-link">Share</a>
+      <a data-url="http://wustmeiming.github.io/2016/04/18/windows下配置git中的vim/" data-id="cixx7v7aa000i4bt0cpdjwjyy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/">vim</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-hexo博客使用本地图片" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/04/15/hexo博客使用本地图片/" class="article-date">
-  <time datetime="2016-04-15T13:57:55.000Z" itemprop="datePublished">2016-04-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/15/hexo博客使用本地图片/">hexo博客使用本地图片</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="&#x73AF;&#x5883;&#x914D;&#x7F6E;"><a href="#&#x73AF;&#x5883;&#x914D;&#x7F6E;" class="headerlink" title="&#x73AF;&#x5883;&#x914D;&#x7F6E;"></a>&#x73AF;&#x5883;&#x914D;&#x7F6E;</h2><ol>
-<li>&#x9996;&#x5148;&#x4FEE;&#x6539; _config.yml &#x4E2D;&#x7684; post_asset_folder&#x5C5E;&#x6027; &#x3002;</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">post_asset_folder:<span class="literal">true</span></div></pre></td></tr></table></figure>
-<ol>
-<li>&#x5728;&#x535A;&#x5BA2;&#x76EE;&#x5F55;&#xFF0C;&#x6267;&#x884C;</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">npm install https://github.com/CodeFalling/hexo-asset-image --save</div></pre></td></tr></table></figure>
-        
-          <p class="article-more-link">
-            <a href="/2016/04/15/hexo博客使用本地图片/#more">更多</a>
-          </p>
-        
-      
-	  <div>
-	  <br/>
-	  &nbsp;&nbsp;转载请注明出处：<a href="http://wustmeiming.github.io/2016/04/15/hexo博客使用本地图片/">http://wustmeiming.github.io/2016/04/15/hexo博客使用本地图片/</a>
-	  </div>
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://wustmeiming.github.io/2016/04/15/hexo博客使用本地图片/" data-id="cixpwcf2x000a3kt03yg3u9d3" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/本地图片/">本地图片</a></li></ul>
 
     </footer>
   </div>
@@ -587,7 +591,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/axure/">axure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mnist数据库/">mnist数据库</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/server/">server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/">tensorflow</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图像处理/">图像处理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图像旋转/">图像旋转</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多说插件/">多说插件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件操作/">文件操作</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/本地图片/">本地图片</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深度学习/">深度学习</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/端口/">端口</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/评论/">评论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/静态博客/">静态博客</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/axure/">axure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mnist/">mnist</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mnist数据库/">mnist数据库</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/server/">server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/">tensorflow</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图像处理/">图像处理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图像旋转/">图像旋转</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多说插件/">多说插件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件操作/">文件操作</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/本地图片/">本地图片</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深度学习/">深度学习</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/端口/">端口</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/评论/">评论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/静态博客/">静态博客</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -597,7 +601,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/axure/" style="font-size: 10px;">axure</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/mnist数据库/" style="font-size: 15px;">mnist数据库</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/server/" style="font-size: 10px;">server</a> <a href="/tags/tensorflow/" style="font-size: 15px;">tensorflow</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/图像处理/" style="font-size: 15px;">图像处理</a> <a href="/tags/图像旋转/" style="font-size: 10px;">图像旋转</a> <a href="/tags/多说插件/" style="font-size: 10px;">多说插件</a> <a href="/tags/文件操作/" style="font-size: 10px;">文件操作</a> <a href="/tags/本地图片/" style="font-size: 10px;">本地图片</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/深度学习/" style="font-size: 15px;">深度学习</a> <a href="/tags/端口/" style="font-size: 10px;">端口</a> <a href="/tags/评论/" style="font-size: 10px;">评论</a> <a href="/tags/静态博客/" style="font-size: 10px;">静态博客</a>
+      <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/axure/" style="font-size: 10px;">axure</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/mnist/" style="font-size: 10px;">mnist</a> <a href="/tags/mnist数据库/" style="font-size: 13.33px;">mnist数据库</a> <a href="/tags/python/" style="font-size: 13.33px;">python</a> <a href="/tags/server/" style="font-size: 10px;">server</a> <a href="/tags/tensorflow/" style="font-size: 16.67px;">tensorflow</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/图像处理/" style="font-size: 13.33px;">图像处理</a> <a href="/tags/图像旋转/" style="font-size: 10px;">图像旋转</a> <a href="/tags/多说插件/" style="font-size: 10px;">多说插件</a> <a href="/tags/文件操作/" style="font-size: 10px;">文件操作</a> <a href="/tags/本地图片/" style="font-size: 10px;">本地图片</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/深度学习/" style="font-size: 13.33px;">深度学习</a> <a href="/tags/端口/" style="font-size: 10px;">端口</a> <a href="/tags/评论/" style="font-size: 10px;">评论</a> <a href="/tags/静态博客/" style="font-size: 10px;">静态博客</a>
     </div>
   </div>
 
@@ -606,7 +610,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">6</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">6</span></li></ul>
     </div>
   </div>
 
@@ -617,6 +621,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/01/14/tensorflow在android上的demo加入mnist手写数字识别/">tensorflow在android上的demo加入mnist手写数字识别</a>
+          </li>
         
           <li>
             <a href="/2017/01/09/Tensorflow模型保存与使用-导入图方案/">Tensorflow模型保存与使用-导入图方案</a>
@@ -632,10 +640,6 @@
         
           <li>
             <a href="/2016/12/30/python图像处理入门-1/">python图像处理入门[1]</a>
-          </li>
-        
-          <li>
-            <a href="/2016/12/27/深度学习入门/">深度学习入门</a>
           </li>
         
       </ul>
